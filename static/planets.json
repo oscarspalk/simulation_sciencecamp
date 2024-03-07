@@ -1,0 +1,42 @@
+[
+    {
+        "name": "sun",
+        "radius": 696340
+    },
+    {
+        "name": "merkur",
+        "radius": 2439
+    },
+    {
+        "name": "venus",
+        "radius": 6051
+    },
+    {
+        "name": "earth",
+        "radius": 6371
+    },
+    {
+        "name": "mars",
+        "radius": 3389
+    },
+    {
+        "name": "jupiter",
+        "radius": 69911
+    },
+    {
+        "name": "saturn",
+        "radius": 58232
+    },
+    {
+        "name": "uranus",
+        "radius": 25362
+    },
+    {
+        "name": "neptun",
+        "radius": 24622
+    },
+    {
+        "name": "pluto",
+        "radius": 1188
+    }
+]
