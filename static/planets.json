@@ -1,42 +1,52 @@
 [
     {
         "name": "sun",
-        "radius": 696340
+        "radius": 696340,
+        "displayName": "Solen"
     },
     {
         "name": "merkur",
-        "radius": 2439
+        "radius": 2439,
+        "displayName": "Merkur"
     },
     {
         "name": "venus",
-        "radius": 6051
+        "radius": 6051,
+        "displayName": "Venus"
     },
     {
         "name": "earth",
-        "radius": 6371
+        "radius": 6371,
+        "displayName": "Jorden"
     },
     {
         "name": "mars",
-        "radius": 3389
+        "radius": 3389,
+        "displayName": "Mars"
     },
     {
         "name": "jupiter",
-        "radius": 69911
+        "radius": 69911,
+        "displayName": "Jupiter"
     },
     {
         "name": "saturn",
-        "radius": 58232
+        "radius": 58232,
+        "displayName": "Saturn"
     },
     {
         "name": "uranus",
-        "radius": 25362
+        "radius": 25362,
+        "displayName": "Uranus"
     },
     {
         "name": "neptun",
-        "radius": 24622
+        "radius": 24622,
+        "displayName": "Neptun"
     },
     {
         "name": "pluto",
-        "radius": 1188
+        "radius": 1188,
+        "displayName": "Pluto"
     }
 ]

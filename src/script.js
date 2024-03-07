@@ -1,17 +1,13 @@
 import './style.css'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import * as dat from 'dat.gui'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
+import { initLabelRender } from './label_renderer';
+import { initGUI } from './gui';
 const loader = new THREE.FileLoader();
-
 const planetsJSON = await loader.loadAsync("planets.json")
 const planets = JSON.parse(planetsJSON)
 const planetModels = []
-console.log(planets)
-// Debug
-const gui = new dat.GUI()
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -21,24 +17,19 @@ const scene = new THREE.Scene()
 
 scene.background = new THREE.Color(0x333333)
 
-let reference = null
-
 var gltfLoader = new GLTFLoader();
-for(let i = 0; i < planets.length; i++){
-    
+for (let i = 0; i < planets.length; i++) {
+
     let planet = planets[i]
     let planetName = planet.name
     let planetScene = await gltfLoader.loadAsync(`planets/${planetName}.glb`)
     let model = planetScene.scene.children[0]
-    if(reference == null){
-        reference = planet.radius
-    }
-    else {
-        let multiplier = planet.radius/reference
-        //model.scale.set(multiplier, multiplier, multiplier)
-    }
     console.log(model)
-    model.position.set(i*2500,0,0)
+
+    let radius = planet.radius
+    model.scale.set(radius,radius, radius)
+    
+    model.position.set(0, 0, i * 149000000)
     planetModels.push(model)
     scene.add(model)
 }
@@ -57,8 +48,7 @@ const sizes = {
     height: window.innerHeight
 }
 
-window.addEventListener('resize', () =>
-{
+window.addEventListener('resize', () => {
     // Update sizes
     sizes.width = window.innerWidth
     sizes.height = window.innerHeight
@@ -70,21 +60,18 @@ window.addEventListener('resize', () =>
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
 })
 
 /**
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 100, 100000)
-camera.position.x = 100
-camera.position.y = 100
-camera.position.z = 2
+const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 1000, 1*Math.pow(10, 10))
+camera.position.x = 800000
+camera.position.y = 0
+camera.position.z = 0
 scene.add(camera)
-
-// Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.enableDamping = true
 
 /**
  * Renderer
@@ -96,25 +83,40 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 /**
+ * Init labelrenderer
+ */
+
+let labelRenderer = initLabelRender(scene, planets, planetModels)
+
+/**
  * Animate
  */
 
-var controls = new OrbitControls( camera, renderer.domElement ); 
 
 const clock = new THREE.Clock()
 
-const tick = () =>
-{
+function render(){
+    renderer.render(scene, camera)
+    labelRenderer.render(scene, camera)
+}
+
+// Debug
+
+initGUI(planets, planetModels, camera)
+
+let controls =new  OrbitControls(camera, canvas)
+
+const tick = () => {
 
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
 
     // Update Orbital Controls
-    // controls.update()
 
     // Render
-    renderer.render(scene, camera)
+   
+    render()
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick)
