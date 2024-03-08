@@ -24,9 +24,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, '../src/index.html'),
             minify: true
-        }),
-        new MiniCSSExtractPlugin(),
-    
+        }),    
     ],
     module:
     {
@@ -45,16 +43,6 @@ module.exports = {
                 use:
                 [
                     'babel-loader'
-                ]
-            },
-
-            // CSS
-            {
-                test: /\.css$/,
-                use:
-                [
-                    MiniCSSExtractPlugin.loader,
-                    'css-loader'
                 ]
             },
 
