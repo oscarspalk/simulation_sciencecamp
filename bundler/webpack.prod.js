@@ -6,6 +6,7 @@ module.exports = merge(
     commonConfiguration,
     {
         mode: 'production',
+        entry: ['@babel/polyfill', './src/script.js'],
         plugins:
         [
             new CleanWebpackPlugin()
