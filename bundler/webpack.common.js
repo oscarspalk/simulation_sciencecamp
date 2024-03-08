@@ -4,6 +4,9 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const webpack = require('webpack')
 module.exports = {
+    experiments: {
+        topLevelAwait: true
+    },
     entry: path.resolve(__dirname, '../src/script.js'),
     output:
     {
