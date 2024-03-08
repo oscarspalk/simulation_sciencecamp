@@ -16,7 +16,6 @@ const parsedData = parseData(dataCSV, config)
 const keys = Object.keys(parsedData.datas)
 const planets = JSON.parse(planetsJSON).filter((e) => keys.includes(e.name))
 
-console.log(parsedData)
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -114,7 +113,6 @@ function toggleRunning(){
 let t = 0
 
 let result = initLabelRender(scene, planets, planetModels)
-console.log(result)
 let labelRenderer = result.labelRenderer
 let labels = result.labels
 
@@ -124,8 +122,6 @@ const tick = () => {
     if(running){
     t += 1
     }
-
-    console.log(`Time at ${parsedData.times[t]}`)
 
     let datas = parsedData.datas
     let labelPosition = new THREE.Vector3()
@@ -148,7 +144,6 @@ const tick = () => {
 
         planetModel.position.copy(labelPosition)
         label.position.copy(labelPosition);
-        console.log(planetModel.position)
     }
 
     // Render
