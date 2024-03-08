@@ -35,7 +35,7 @@ function fitCameraToSelection(camera, controls, selection, fitOffset = 1.3) {
   controls.update();
 }
 
-function initGUI(planets, planetModels, camera, controls, onSelectPlanet) {
+function initGUI(planets, planetModels, camera, controls, onSelectPlanet, toggleRunning) {
     const gui = new dat.GUI()
     const planetFolder = gui.addFolder("Planeter")
     for (let i = 0; i < planets.length; i++) {
@@ -49,7 +49,13 @@ function initGUI(planets, planetModels, camera, controls, onSelectPlanet) {
 
         planetFolder.add(selectButton, planet.name)
     }
-    planetFolder.open()
+    gui.add(
+      {
+        pause:function (){
+          toggleRunning()
+        }
+      }, 'pause'
+    )
 }
 
 export { initGUI }
